@@ -7,8 +7,7 @@ class SquircleBorder extends ShapeBorder {
   const SquircleBorder({
     this.side: BorderSide.none,
     this.radius,
-  })
-      : assert(side != null);
+  }) : assert(side != null);
 
   @override
   EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
@@ -31,10 +30,7 @@ class SquircleBorder extends ShapeBorder {
     return _squirclePath(rect, radius);
   }
 
-
-
   static Path _squirclePath(Rect rect, double radius) {
-
     final c = rect.center;
     double startX = rect.left;
     double endX = rect.right;
@@ -47,41 +43,69 @@ class SquircleBorder extends ShapeBorder {
     if (radius == null) {
       return new Path()
         ..moveTo(startX, midY)
-        ..cubicTo(startX, startY, startX, startY, midX,   startY)
-        ..cubicTo(endX,   startY, endX,   startY, endX,   midY)
-        ..cubicTo(endX,   endY,   endX,   endY,   midX,   endY)
-        ..cubicTo(startX, endY,   startX, endY,   startX, midY)
+        ..cubicTo(startX, startY, startX, startY, midX, startY)
+        ..cubicTo(endX, startY, endX, startY, endX, midY)
+        ..cubicTo(endX, endY, endX, endY, midX, endY)
+        ..cubicTo(startX, endY, startX, endY, startX, midY)
         ..close();
     }
 
     return new Path()
 
-    // Start position
+      // Start position
       ..moveTo(startX, startY + radius)
 
-    // top left corner
-      ..cubicTo(startX, startY, startX, startY, startX + radius, startY,)
+      // top left corner
+      ..cubicTo(
+        startX,
+        startY,
+        startX,
+        startY,
+        startX + radius,
+        startY,
+      )
 
-    // top line
+      // top line
       ..lineTo(endX - radius, startY)
 
-    // top right corner
-      ..cubicTo(endX, startY, endX, startY, endX, startY + radius,)
+      // top right corner
+      ..cubicTo(
+        endX,
+        startY,
+        endX,
+        startY,
+        endX,
+        startY + radius,
+      )
 
-    // right line
+      // right line
       ..lineTo(endX, endY - radius)
 
-    // bottom right corner
-      ..cubicTo(endX, endY, endX, endY, endX - radius, endY,)
+      // bottom right corner
+      ..cubicTo(
+        endX,
+        endY,
+        endX,
+        endY,
+        endX - radius,
+        endY,
+      )
 
-    // bottom line
+      // bottom line
       ..lineTo(startX + radius, endY)
 
-    // bottom left corner
-      ..cubicTo(startX, endY, startX, endY, startX, endY - radius,)
+      // bottom left corner
+      ..cubicTo(
+        startX,
+        endY,
+        startX,
+        endY,
+        startX,
+        endY - radius,
+      )
 
-    // left line
-    //..moveTo(startX, startY + radius)
+      // left line
+      //..moveTo(startX, startY + radius)
 
       ..close();
   }
@@ -92,50 +116,46 @@ class SquircleBorder extends ShapeBorder {
       case BorderStyle.none:
         break;
       case BorderStyle.solid:
-        var path = getOuterPath(rect.deflate(side.width / 2.0), textDirection: textDirection);
+        var path = getOuterPath(rect.deflate(side.width / 2.0),
+            textDirection: textDirection);
         canvas.drawPath(path, side.toPaint());
     }
   }
 }
 
-
-
 class CupertinoCard extends StatelessWidget {
-
   final EdgeInsets margin;
   final EdgeInsets padding;
   final Widget child;
   final double elevation;
+  final Color color;
 
   CupertinoCard({
     this.child,
     this.elevation = 2.0,
     this.margin: const EdgeInsets.all(4.0),
-    this.padding: const EdgeInsets.all(0.0)
+    this.padding: const EdgeInsets.all(0.0),
+    this.color: Colors.white,
   });
 
   @override
   Widget build(BuildContext context) {
-
     return new Container(
       decoration: new BoxDecoration(
         color: Colors.transparent,
-        borderRadius: new BorderRadius.all(new Radius.circular(4.0),),
+        borderRadius: new BorderRadius.all(
+          new Radius.circular(4.0),
+        ),
       ),
       margin: margin,
       child: new Material(
-        color: Colors.white,
+        color: color,
         shape: new SquircleBorder(
           radius: 20.0,
         ),
         elevation: elevation,
-        child: new Padding(
-            padding: padding,
-            child: child
-        ),
+        child: new Padding(padding: padding, child: child),
       ),
     );
-
   }
-
 }
