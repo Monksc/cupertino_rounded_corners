@@ -40,7 +40,7 @@ new Container(
 ## Use the card
 ```
 CupertinoCard(
-  child: cont Text("HELLO WORLD"),
+  child: const Text("HELLO WORLD"),
   elevation: 2.0,
   margin: const EdgeInsets.all(4.0),
   padding: const EdgeInsets.all(0.0),
