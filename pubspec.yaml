@@ -1,6 +1,6 @@
 name: cupertino_rounded_corners
 description: A new Flutter package to make cupertino rounded corners also refrered to as squircles using a bezier path and having the two points in the corners
-version: 0.0.1
+version: 1.0.2
 author: "Cameron Monks <ccmonks32@gmail.com>"
 homepage: https://github.com/Monksc
 
@@ -10,7 +10,11 @@ dependencies:
 
 dev_dependencies:
   flutter_test:
-    sdk: flutter
+
+environment:
+    sdk: ">=1.19.0 <3.0.0"   
+    
+sdk: flutter
 
 # For information on the generic Dart part of this file, see the
 # following page: https://www.dartlang.org/tools/pub/pubspec

@@ -129,6 +129,7 @@ class CupertinoCard extends StatelessWidget {
   final Widget child;
   final double elevation;
   final Color color;
+  final double radius;
 
   CupertinoCard({
     this.child,
@@ -136,6 +137,7 @@ class CupertinoCard extends StatelessWidget {
     this.margin: const EdgeInsets.all(4.0),
     this.padding: const EdgeInsets.all(0.0),
     this.color: Colors.white,
+    this.radius: 20.0,
   });
 
   @override
@@ -151,7 +153,7 @@ class CupertinoCard extends StatelessWidget {
       child: new Material(
         color: color,
         shape: new SquircleBorder(
-          radius: 20.0,
+          radius: radius,
         ),
         elevation: elevation,
         child: new Padding(padding: padding, child: child),
