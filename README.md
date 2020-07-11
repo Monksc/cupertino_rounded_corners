@@ -46,6 +46,6 @@ CupertinoCard(
   padding: const EdgeInsets.all(0.0),
   color: Colors.white,
   radius: 20.0,
-});
+);
 ```
 
