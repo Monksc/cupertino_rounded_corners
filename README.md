@@ -54,4 +54,5 @@ CupertinoCard(
 ```
 
 ## Example Image
-![Alt text](screenshots/screenshot1.png?raw=true "Title")
+<!--![Alt text](screenshots/screenshot1.png?raw=true "Title")-->
+![alt text](https://github.com/monksc/cupertino_rounded_corners/blob/master/screenshots/screenshot1.png?raw=true)

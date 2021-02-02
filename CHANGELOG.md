@@ -15,3 +15,12 @@ a radius in the card.
 ## [1.1.0] - TODO: Add release date.
 
 Added in examples and now all radius use a BorderRadius object.
+
+
+## [1.1.1] - TODO: Add release date.
+
+Added in screenshots to the README.
+
+## [1.1.2] - TODO: Add release date.
+
+Added in screenshots to the README and added them to the README.
