@@ -53,4 +53,5 @@ CupertinoCard(
 );
 ```
 
+## Example Image
 ![Alt text](screenshots/screenshot1.png?raw=true "Title")
