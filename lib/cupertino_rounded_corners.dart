@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SquircleBorder extends ShapeBorder {
   final BorderSide side;
-  final double radius;
+  final BorderRadius radius;
 
   const SquircleBorder({
     this.side: BorderSide.none,
@@ -30,7 +30,7 @@ class SquircleBorder extends ShapeBorder {
     return _squirclePath(rect, radius);
   }
 
-  static Path _squirclePath(Rect rect, double radius) {
+  static Path _squirclePath(Rect rect, BorderRadius radius) {
     final c = rect.center;
     double startX = rect.left;
     double endX = rect.right;
@@ -53,7 +53,7 @@ class SquircleBorder extends ShapeBorder {
     return new Path()
 
       // Start position
-      ..moveTo(startX, startY + radius)
+      ..moveTo(startX, startY + radius.topLeft.y)
 
       // top left corner
       ..cubicTo(
@@ -61,12 +61,12 @@ class SquircleBorder extends ShapeBorder {
         startY,
         startX,
         startY,
-        startX + radius,
+        startX + radius.topLeft.x,
         startY,
       )
 
       // top line
-      ..lineTo(endX - radius, startY)
+      ..lineTo(endX - radius.topRight.x, startY)
 
       // top right corner
       ..cubicTo(
@@ -75,11 +75,11 @@ class SquircleBorder extends ShapeBorder {
         endX,
         startY,
         endX,
-        startY + radius,
+        startY + radius.topRight.y,
       )
 
       // right line
-      ..lineTo(endX, endY - radius)
+      ..lineTo(endX, endY - radius.bottomRight.y)
 
       // bottom right corner
       ..cubicTo(
@@ -87,12 +87,12 @@ class SquircleBorder extends ShapeBorder {
         endY,
         endX,
         endY,
-        endX - radius,
+        endX - radius.bottomRight.x,
         endY,
       )
 
       // bottom line
-      ..lineTo(startX + radius, endY)
+      ..lineTo(startX + radius.bottomLeft.x, endY)
 
       // bottom left corner
       ..cubicTo(
@@ -101,7 +101,7 @@ class SquircleBorder extends ShapeBorder {
         startX,
         endY,
         startX,
-        endY - radius,
+        endY - radius.bottomLeft.y,
       )
 
       // left line
@@ -129,7 +129,7 @@ class CupertinoCard extends StatelessWidget {
   final Widget child;
   final double elevation;
   final Color color;
-  final double radius;
+  final BorderRadius radius;
 
   CupertinoCard({
     this.child,
@@ -137,7 +137,11 @@ class CupertinoCard extends StatelessWidget {
     this.margin: const EdgeInsets.all(4.0),
     this.padding: const EdgeInsets.all(0.0),
     this.color: Colors.white,
-    this.radius: 20.0,
+    this.radius: const BorderRadius.all(
+      const Radius.circular(
+        40.0,
+      ),
+    ),
   });
 
   @override

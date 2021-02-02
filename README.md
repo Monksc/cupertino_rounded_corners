@@ -29,7 +29,9 @@ new Container(
   child: new Material(
     color: color,
     shape: new SquircleBorder(
-      radius: 20.0,
+      radius: BorderRadius.all(
+        new Radius.circular(40.0),
+      ),
     ),
     elevation: elevation,
     child: new Padding(padding: padding, child: child),
@@ -45,7 +47,9 @@ CupertinoCard(
   margin: const EdgeInsets.all(4.0),
   padding: const EdgeInsets.all(0.0),
   color: Colors.white,
-  radius: 20.0,
+  radius: BorderRadius.all(
+    new Radius.circular(40.0),
+  ),
 );
 ```
 

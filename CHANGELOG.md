@@ -11,3 +11,7 @@ Made bug fixes
 Updated README to show correct usage and added support for
 a radius in the card.
 
+
+## [1.1.0] - TODO: Add release date.
+
+Added in examples and now all radius use a BorderRadius object.
