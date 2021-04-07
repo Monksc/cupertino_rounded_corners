@@ -20,3 +20,8 @@ Added in examples and now all radius use a BorderRadius object.
 ## [1.1.3] - TODO: Add release date.
 
 Added in screenshots to the README and added them to the README.
+
+## [2.0.0] - TODO: Add release date.
+
+Updated code to support Flutter 2.0 null safety.
+
