@@ -7,7 +7,7 @@ class SquircleBorder extends ShapeBorder {
   const SquircleBorder({
     this.side: BorderSide.none,
     this.radius,
-  }) : assert(side != null);
+  });
 
   @override
   EdgeInsetsGeometry get dimensions => EdgeInsets.all(side.width);
