@@ -1,6 +1,6 @@
 name: cupertino_rounded_corners
 description: A widget and border to make cupertino rounded corners also refrered to as squircles using a bezier path and having the two points in the corners.
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/Monksc
 repository: https://github.com/Monksc/cupertino_rounded_corners
 issue_tracker: https://github.com/Monksc/cupertino_rounded_corners/issues

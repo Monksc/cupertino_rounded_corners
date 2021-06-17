@@ -25,3 +25,7 @@ Added in screenshots to the README and added them to the README.
 
 Updated code to support Flutter 2.0 null safety.
 
+## [2.0.1] - Null Safety
+
+Fixed a few descriptions and some other small things.
+
