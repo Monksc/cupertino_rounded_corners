@@ -1,6 +1,6 @@
 # cupertino_rounded_corners
 
-A new Flutter package to make cupertino rounded corners also refrered to as squircles using a bezier path and having the two points in the corners
+A widget and border to make cupertino rounded corners also refrered to as squircles using a bezier path and having the two points in the corners.
 
 ## Getting Started
 
