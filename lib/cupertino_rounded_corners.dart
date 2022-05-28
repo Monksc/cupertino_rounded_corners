@@ -1,5 +1,84 @@
 import 'package:flutter/material.dart';
 
+Path SquirclePath(Rect rect, BorderRadius? radius) {
+  final c = rect.center;
+  double startX = rect.left;
+  double endX = rect.right;
+  double startY = rect.top;
+  double endY = rect.bottom;
+
+  double midX = c.dx;
+  double midY = c.dy;
+
+  if (radius == null) {
+    return new Path()
+      ..moveTo(startX, midY)
+      ..cubicTo(startX, startY, startX, startY, midX, startY)
+      ..cubicTo(endX, startY, endX, startY, endX, midY)
+      ..cubicTo(endX, endY, endX, endY, midX, endY)
+      ..cubicTo(startX, endY, startX, endY, startX, midY)
+      ..close();
+  }
+
+  return new Path()
+
+    // Start position
+    ..moveTo(startX, startY + radius.topLeft.y)
+
+    // top left corner
+    ..cubicTo(
+      startX,
+      startY,
+      startX,
+      startY,
+      startX + radius.topLeft.x,
+      startY,
+    )
+
+    // top line
+    ..lineTo(endX - radius.topRight.x, startY)
+
+    // top right corner
+    ..cubicTo(
+      endX,
+      startY,
+      endX,
+      startY,
+      endX,
+      startY + radius.topRight.y,
+    )
+
+    // right line
+    ..lineTo(endX, endY - radius.bottomRight.y)
+
+    // bottom right corner
+    ..cubicTo(
+      endX,
+      endY,
+      endX,
+      endY,
+      endX - radius.bottomRight.x,
+      endY,
+    )
+
+    // bottom line
+    ..lineTo(startX + radius.bottomLeft.x, endY)
+
+    // bottom left corner
+    ..cubicTo(
+      startX,
+      endY,
+      startX,
+      endY,
+      startX,
+      endY - radius.bottomLeft.y,
+    )
+
+    // left line
+    //..moveTo(startX, startY + radius)
+    ..close();
+}
+
 class SquircleBorder extends ShapeBorder {
   final BorderSide side;
   final BorderRadius? radius;
@@ -22,92 +101,12 @@ class SquircleBorder extends ShapeBorder {
 
   @override
   Path getInnerPath(Rect rect, {TextDirection? textDirection}) {
-    return _squirclePath(rect.deflate(side.width), radius);
+    return SquirclePath(rect.deflate(side.width), radius);
   }
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    return _squirclePath(rect, radius);
-  }
-
-  static Path _squirclePath(Rect rect, BorderRadius? radius) {
-    final c = rect.center;
-    double startX = rect.left;
-    double endX = rect.right;
-    double startY = rect.top;
-    double endY = rect.bottom;
-
-    double midX = c.dx;
-    double midY = c.dy;
-
-    if (radius == null) {
-      return new Path()
-        ..moveTo(startX, midY)
-        ..cubicTo(startX, startY, startX, startY, midX, startY)
-        ..cubicTo(endX, startY, endX, startY, endX, midY)
-        ..cubicTo(endX, endY, endX, endY, midX, endY)
-        ..cubicTo(startX, endY, startX, endY, startX, midY)
-        ..close();
-    }
-
-    return new Path()
-
-      // Start position
-      ..moveTo(startX, startY + radius.topLeft.y)
-
-      // top left corner
-      ..cubicTo(
-        startX,
-        startY,
-        startX,
-        startY,
-        startX + radius.topLeft.x,
-        startY,
-      )
-
-      // top line
-      ..lineTo(endX - radius.topRight.x, startY)
-
-      // top right corner
-      ..cubicTo(
-        endX,
-        startY,
-        endX,
-        startY,
-        endX,
-        startY + radius.topRight.y,
-      )
-
-      // right line
-      ..lineTo(endX, endY - radius.bottomRight.y)
-
-      // bottom right corner
-      ..cubicTo(
-        endX,
-        endY,
-        endX,
-        endY,
-        endX - radius.bottomRight.x,
-        endY,
-      )
-
-      // bottom line
-      ..lineTo(startX + radius.bottomLeft.x, endY)
-
-      // bottom left corner
-      ..cubicTo(
-        startX,
-        endY,
-        startX,
-        endY,
-        startX,
-        endY - radius.bottomLeft.y,
-      )
-
-      // left line
-      //..moveTo(startX, startY + radius)
-
-      ..close();
+    return SquirclePath(rect, radius);
   }
 
   @override
@@ -129,7 +128,10 @@ class CupertinoCard extends StatelessWidget {
   final Widget? child;
   final double elevation;
   final Color color;
+  final Color? splashColor;
   final BorderRadius radius;
+  final Decoration? decoration;
+  final VoidCallback? onPressed;
 
   CupertinoCard({
     this.child,
@@ -137,30 +139,45 @@ class CupertinoCard extends StatelessWidget {
     this.margin: const EdgeInsets.all(4.0),
     this.padding: const EdgeInsets.all(0.0),
     this.color: Colors.white,
+    this.splashColor,
+    this.decoration,
     this.radius: const BorderRadius.all(
       const Radius.circular(
         40.0,
       ),
     ),
+    this.onPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      decoration: new BoxDecoration(
-        color: Colors.transparent,
-        borderRadius: new BorderRadius.all(
-          new Radius.circular(4.0),
-        ),
-      ),
-      margin: margin,
+    var shapeborder = SquircleBorder(
+      radius: radius,
+    );
+
+    return new Padding(
+      padding: margin,
       child: new Material(
-        color: color,
-        shape: new SquircleBorder(
-          radius: radius,
-        ),
         elevation: elevation,
-        child: new Padding(padding: padding, child: child),
+        shape: shapeborder,
+        child: ClipPath.shape(
+          shape: shapeborder,
+          child: Material(
+            color: color,
+            child: Ink(
+              decoration: decoration,
+              child: InkWell(
+                customBorder: shapeborder,
+                onTap: onPressed,
+                splashColor: splashColor,
+                child: new Padding(
+                  padding: padding,
+                  child: child,
+                ),
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

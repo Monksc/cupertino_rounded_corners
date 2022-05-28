@@ -29,3 +29,9 @@ Updated code to support Flutter 2.0 null safety.
 
 Fixed a few descriptions and some other small things.
 
+## [2.1.0] - Gradient Background
+
+CupertinoCard now supports gradient backgrounds.
+CupertinoCard can be tapped and contains the widget InkWell.
+CupertinoCard now has a clipped path so the child is clipped.
+
